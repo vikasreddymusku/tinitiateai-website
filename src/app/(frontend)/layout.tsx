@@ -39,14 +39,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
-        {nextDemo && (
-          <UpcomingBatchPopup
-            slotId={nextDemo.id}
-            startsAt={nextDemo.startsAt}
-            courseTitle={nextDemoCourse?.title ?? null}
-            trainerName={nextDemoTrainer?.name ?? null}
-          />
-        )}
+        <UpcomingBatchPopup
+          slotId={nextDemo?.id ?? null}
+          startsAt={nextDemo?.startsAt ?? null}
+          courseTitle={nextDemoCourse?.title ?? null}
+          trainerName={nextDemoTrainer?.name ?? null}
+        />
         <div className="sticky top-0 z-50">
           <NextDemoBar slot={nextDemo} />
           <Navbar siteName={settings.siteName} />
