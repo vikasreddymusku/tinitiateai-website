@@ -33,6 +33,14 @@ export const Courses: CollectionConfig = {
       relationTo: 'media',
     },
     {
+  name: 'cardLogo',
+  type: 'upload',
+  relationTo: 'media',
+  admin: {
+    description: 'Technology logo displayed on the course card',
+  },
+},
+    {
       name: 'shortDescription',
       type: 'textarea',
       required: true,
@@ -149,6 +157,14 @@ export const Courses: CollectionConfig = {
         description: 'Shows in the "Trending" tab on the courses page',
       },
     },
+    {
+  name: 'isPremium',
+  type: 'checkbox',
+  defaultValue: false,
+  admin: {
+    description: 'Shows the Premium badge on the course card',
+  },
+},
     {
       name: 'tags',
       type: 'select',

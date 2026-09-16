@@ -319,6 +319,10 @@ export interface Course {
   slug: string;
   category: number | Category;
   thumbnail?: (number | null) | Media;
+  /**
+   * Technology logo displayed on the course card
+   */
+  cardLogo?: (number | null) | Media;
   shortDescription: string;
   description: {
     root: {
@@ -381,6 +385,10 @@ export interface Course {
    * Shows in the "Trending" tab on the courses page
    */
   featured?: boolean | null;
+  /**
+   * Shows the Premium badge on the course card
+   */
+  isPremium?: boolean | null;
   /**
    * Controls which tabs this course appears under on the courses page
    */
@@ -817,6 +825,7 @@ export interface CoursesSelect<T extends boolean = true> {
   slug?: T;
   category?: T;
   thumbnail?: T;
+  cardLogo?: T;
   shortDescription?: T;
   description?: T;
   level?: T;
@@ -856,6 +865,7 @@ export interface CoursesSelect<T extends boolean = true> {
       };
   rating?: T;
   featured?: T;
+  isPremium?: T;
   tags?: T;
   startDate?: T;
   bannerLabel?: T;

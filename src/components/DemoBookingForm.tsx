@@ -80,7 +80,7 @@ export function DemoBookingForm({
     return (
       <div className="rounded-xl bg-green-50 p-8 text-center text-green-700">
         <p className="text-lg font-semibold">Demo booked!</p>
-        <p className="mt-2 text-sm">We&apos;ve sent a confirmation and will follow up with a joining link shortly.</p>
+        <p className="mt-2 text-sm">Your demo request has been submitted successfully. Our team will contact you shortly with the next steps.</p>
       </div>
     )
   }

@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { APIError } from 'payload'
+import { sendDemoBookingEmail } from '../lib/demoBookingEmail'
 
 export const DemoBookings: CollectionConfig = {
   slug: 'demo-bookings',
@@ -86,5 +87,59 @@ export const DemoBookings: CollectionConfig = {
         return data
       },
     ],
+
+      afterChange: [
+    async ({ doc, req, operation }) => {
+      if (operation !== 'create') return doc
+
+      try {
+        const slotId =
+          typeof doc.slot === 'object' ? doc.slot.id : doc.slot
+
+        const courseId = doc.course
+          ? typeof doc.course === 'object'
+            ? doc.course.id
+            : doc.course
+          : null
+
+        const slot = await req.payload.findByID({
+          collection: 'demo-slots',
+          id: slotId,
+        })
+
+        let courseTitle: string | null = null
+
+        if (courseId) {
+          const course = await req.payload.findByID({
+            collection: 'courses',
+            id: courseId,
+          })
+
+          courseTitle = course?.title ?? null
+        } else if (
+          slot.course &&
+          typeof slot.course === 'object'
+        ) {
+          courseTitle = slot.course.title ?? null
+        }
+
+        await sendDemoBookingEmail({
+          name: doc.name,
+          email: doc.email,
+          phone: doc.phone,
+          message: doc.message,
+          courseTitle,
+          slotStartsAt: slot.startsAt,
+        })
+      } catch (error) {
+        req.payload.logger.error({
+          err: error,
+          msg: 'Failed to send demo booking notification email',
+        })
+      }
+
+      return doc
+    },
+  ],
   },
 }
