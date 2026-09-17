@@ -12,7 +12,7 @@ const trainingLinks = [
   { href: '/online-training', label: 'Online Training' },
   { href: '/weekend-training', label: 'Weekend Training' },
   { href: '/internships', label: 'Internships' },
-  { href: '/course-schedule', label: 'Course Schedule' },
+  { href: '/new-batches', label: 'New Batches' },
 ]
 
 const servicesLinks = [
