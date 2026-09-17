@@ -2,6 +2,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { buildConfig } from 'payload'
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import sharp from 'sharp'
 
@@ -50,11 +51,21 @@ export default buildConfig({
   ],
   globals: [SiteSettings],
   editor: lexicalEditor(),
-  db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URI || 'file:./tinitiateai.db',
-    },
-  }),
+  db:
+  process.env.DB_PROVIDER === 'postgres'
+    ? postgresAdapter({
+        pool: {
+          connectionString:
+            process.env.DATABASE_URL_UNPOOLED ||
+            process.env.DATABASE_URL ||
+            '',
+        },
+      })
+    : sqliteAdapter({
+        client: {
+          url: process.env.DATABASE_URI || 'file:./tinitiateai.db',
+        },
+      }),
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
