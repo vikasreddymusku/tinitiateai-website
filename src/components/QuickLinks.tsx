@@ -1,8 +1,17 @@
 import Link from 'next/link'
-import { getSiteSettings } from '@/lib/siteSettings'
+import { getPayload } from '@/lib/getPayload'
 
 export async function QuickLinks() {
-  const settings = await getSiteSettings()
+  const payload = await getPayload()
+
+  // Get real course count directly from the courses collection
+  const courses = await payload.find({
+    collection: 'courses',
+    limit: 1,
+    depth: 0,
+  })
+
+  const courseCount = courses.totalDocs
 
   const links = [
     {
@@ -14,13 +23,13 @@ export async function QuickLinks() {
     {
       href: '/courses',
       label: 'Explore Courses',
-      sub: `${settings.coursesOffered ?? 0} programs available`,
+      sub: `${courseCount} ${courseCount === 1 ? 'course' : 'courses'} available`,
       gradient: 'from-amber-500 to-orange-600',
     },
     {
-      href: '/placements',
-      label: 'Placement Stories',
-      sub: `${settings.studentsPlaced ?? 0}+ students placed`,
+      href: '/real-time-projects',
+      label: 'Real-Time Projects',
+      sub: 'Build practical industry-ready projects',
       gradient: 'from-fuchsia-500 to-purple-700',
     },
     {

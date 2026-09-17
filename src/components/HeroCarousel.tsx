@@ -38,7 +38,7 @@ export function HeroCarousel() {
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((i) => (i + 1) % slides.length)
-    }, 6000)
+    }, 3000)
 
     return () => clearInterval(timer)
   }, [])
@@ -54,15 +54,17 @@ export function HeroCarousel() {
   const slide = slides[index]
 
   return (
-<section
-  className="relative h-[420px] w-full overflow-hidden sm:h-[500px] lg:h-[540px]"
-  style={{
-    backgroundImage: `url(${slide.backgroundImage})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-  }}
->
+<section className="relative h-[420px] w-full overflow-hidden sm:h-[500px] lg:h-[540px]">
+  {/* Animated hero background */}
+  <div
+    key={slide.backgroundImage}
+    className="absolute inset-0 animate-[heroFade_700ms_ease-out] bg-cover bg-center bg-no-repeat"
+    style={{
+      backgroundImage: `url(${slide.backgroundImage})`,
+    }}
+  />
+
+  {/* keep all your existing buttons/arrows/dots below */}
   {/* Action buttons */}
   <div className="absolute bottom-10 left-[8%] z-20 flex flex-wrap gap-3">
     <Link

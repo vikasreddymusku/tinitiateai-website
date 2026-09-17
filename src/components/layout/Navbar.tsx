@@ -16,10 +16,10 @@ const trainingLinks = [
 ]
 
 const servicesLinks = [
-  { href: '/interview-questions', label: 'Interview Questions' },
   { href: '/placement-registration', label: 'Placement Registration' },
   { href: '/job-assistance', label: 'Job Assistance' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/workshops', label: 'Workshops' },
+  { href: '/real-time-projects', label: 'Real-Time Projects' },
 ]
 
 const dropdownGroups = [

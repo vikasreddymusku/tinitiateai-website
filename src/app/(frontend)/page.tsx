@@ -5,32 +5,21 @@ import { HeroCarousel } from '@/components/HeroCarousel'
 import { QuickLinks } from '@/components/QuickLinks'
 import { CourseCarousel } from '@/components/CourseCarousel'
 import { getPayload } from '@/lib/getPayload'
-import { getSiteSettings } from '@/lib/siteSettings'
 
 export default async function HomePage() {
   const payload = await getPayload()
-  const [settings, allCourses, categories, testimonials] = await Promise.all([
-    getSiteSettings(),
-    payload.find({ collection: 'courses', limit: 20, sort: 'startDate', depth: 1 }),
-    payload.find({ collection: 'categories', limit: 6 }),
-    payload.find({ collection: 'testimonials', limit: 3, depth: 1 }),
-  ])
+  const [allCourses, categories, testimonials] = await Promise.all([
+  payload.find({ collection: 'courses', limit: 20, sort: 'startDate', depth: 1 }),
+  payload.find({ collection: 'categories', limit: 6 }),
+  payload.find({ collection: 'testimonials', limit: 3, depth: 1 }),
+])
 
   return (
     <>
       <HeroCarousel />
       <QuickLinks />
 
-      <section className="bg-slate-950 py-10 text-white">
-        <Container>
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-            <Stat label="Students Placed" value={`${settings.studentsPlaced ?? 0}+`} />
-            <Stat label="Courses Offered" value={`${settings.coursesOffered ?? 0}+`} />
-            <Stat label="Hiring Partners" value={`${settings.hiringPartners ?? 0}+`} />
-            <Stat label="Trainer Experience" value="8+ yrs avg." />
-          </div>
-        </Container>
-      </section>
+
 
       <section className="py-20">
         <Container>
@@ -92,14 +81,7 @@ export default async function HomePage() {
   )
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <p className="text-2xl font-bold sm:text-3xl">{value}</p>
-      <p className="mt-1 text-sm text-slate-400">{label}</p>
-    </div>
-  )
-}
+
 
 function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
