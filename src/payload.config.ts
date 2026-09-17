@@ -21,6 +21,8 @@ import { ContactMessages } from './collections/ContactMessages'
 import { Batches } from './collections/Batches'
 import { PlacementRegistrations } from './collections/PlacementRegistrations'
 import { SiteSettings } from './globals/SiteSettings'
+import { Workshops } from './collections/Workshops'
+import { RealTimeProjects } from './collections/RealTimeProjects'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -40,6 +42,8 @@ export default buildConfig({
     Categories,
     Trainers,
     Courses,
+    Workshops,
+    RealTimeProjects,
     Testimonials,
     BlogPosts,
     Enrollments,

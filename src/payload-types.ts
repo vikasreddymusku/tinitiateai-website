@@ -74,6 +74,8 @@ export interface Config {
     categories: Category;
     trainers: Trainer;
     courses: Course;
+    workshops: Workshop;
+    'real-time-projects': RealTimeProject;
     testimonials: Testimonial;
     'blog-posts': BlogPost;
     enrollments: Enrollment;
@@ -95,6 +97,8 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     trainers: TrainersSelect<false> | TrainersSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
+    workshops: WorkshopsSelect<false> | WorkshopsSelect<true>;
+    'real-time-projects': RealTimeProjectsSelect<false> | RealTimeProjectsSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     enrollments: EnrollmentsSelect<false> | EnrollmentsSelect<true>;
@@ -410,6 +414,75 @@ export interface Course {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "workshops".
+ */
+export interface Workshop {
+  id: number;
+  title: string;
+  slug: string;
+  shortDescription: string;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  thumbnail?: (number | null) | Media;
+  duration?: string | null;
+  mode?: ('online' | 'classroom' | 'hybrid') | null;
+  scheduledAt?: string | null;
+  featured?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "real-time-projects".
+ */
+export interface RealTimeProject {
+  id: number;
+  title: string;
+  slug: string;
+  shortDescription: string;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  thumbnail?: (number | null) | Media;
+  category?: (number | null) | Category;
+  level?: ('beginner' | 'intermediate' | 'advanced') | null;
+  tools?:
+    | {
+        tool: string;
+        id?: string | null;
+      }[]
+    | null;
+  featured?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "testimonials".
  */
 export interface Testimonial {
@@ -609,6 +682,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'courses';
         value: number | Course;
+      } | null)
+    | ({
+        relationTo: 'workshops';
+        value: number | Workshop;
+      } | null)
+    | ({
+        relationTo: 'real-time-projects';
+        value: number | RealTimeProject;
       } | null)
     | ({
         relationTo: 'testimonials';
@@ -870,6 +951,45 @@ export interface CoursesSelect<T extends boolean = true> {
   startDate?: T;
   bannerLabel?: T;
   bannerTag?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "workshops_select".
+ */
+export interface WorkshopsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  shortDescription?: T;
+  description?: T;
+  thumbnail?: T;
+  duration?: T;
+  mode?: T;
+  scheduledAt?: T;
+  featured?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "real-time-projects_select".
+ */
+export interface RealTimeProjectsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  shortDescription?: T;
+  description?: T;
+  thumbnail?: T;
+  category?: T;
+  level?: T;
+  tools?:
+    | T
+    | {
+        tool?: T;
+        id?: T;
+      };
+  featured?: T;
   updatedAt?: T;
   createdAt?: T;
 }

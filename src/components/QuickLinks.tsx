@@ -4,14 +4,22 @@ import { getPayload } from '@/lib/getPayload'
 export async function QuickLinks() {
   const payload = await getPayload()
 
-  // Get real course count directly from the courses collection
-  const courses = await payload.find({
-    collection: 'courses',
-    limit: 1,
-    depth: 0,
-  })
+  // Get real counts directly from Payload collections
+  const [courses, projects] = await Promise.all([
+    payload.find({
+      collection: 'courses',
+      limit: 1,
+      depth: 0,
+    }),
+    payload.find({
+      collection: 'real-time-projects',
+      limit: 1,
+      depth: 0,
+    }),
+  ])
 
   const courseCount = courses.totalDocs
+  const projectCount = projects.totalDocs
 
   const links = [
     {
@@ -29,7 +37,7 @@ export async function QuickLinks() {
     {
       href: '/real-time-projects',
       label: 'Real-Time Projects',
-      sub: 'Build practical industry-ready projects',
+      sub: `${projectCount} ${projectCount === 1 ? 'project' : 'projects'} available`,
       gradient: 'from-fuchsia-500 to-purple-700',
     },
     {
