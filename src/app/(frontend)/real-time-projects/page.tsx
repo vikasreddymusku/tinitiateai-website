@@ -1,45 +1,52 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
+import { getPayload } from '@/lib/getPayload'
 
 export const metadata = {
   title: 'Real-Time Projects — TinitiateAI',
 }
 
-const projects = [
-  {
-    title: 'Full Stack Application',
-    description:
-      'Build an end-to-end application with frontend, backend APIs, database integration, authentication, and deployment.',
-  },
-  {
-    title: 'AI & Machine Learning Project',
-    description:
-      'Work with real datasets and build an AI or machine learning solution using practical industry workflows.',
-  },
-  {
-    title: 'Cloud & DevOps Project',
-    description:
-      'Learn deployment, CI/CD, containerization, cloud hosting, and production-style application delivery.',
-  },
-]
+export default async function RealTimeProjectsPage() {
+  const payload = await getPayload()
 
-export default function RealTimeProjectsPage() {
+  const result = await payload.find({
+    collection: 'real-time-projects',
+    limit: 100,
+    depth: 1,
+  })
+
+  const projects = result.docs
+
   return (
     <>
-      <section className="bg-slate-950 py-16 text-white">
+      <section className="relative isolate overflow-hidden py-16 text-white sm:py-20">
+        <Image
+          src="/images/training/real-time-projects.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="-z-20 object-cover object-center"
+        />
+
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/20" />
+
         <Container>
-          <span className="text-sm font-semibold uppercase tracking-wide text-brand-300">
-            Services
-          </span>
+          <div className="max-w-2xl">
+            <span className="text-sm font-semibold uppercase tracking-wide text-brand-300">
+              Services
+            </span>
 
-          <h1 className="mt-2 max-w-2xl text-3xl font-bold sm:text-4xl">
-            Real-Time Projects
-          </h1>
+            <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
+              Real-Time Projects
+            </h1>
 
-          <p className="mt-4 max-w-2xl text-slate-300">
-            Gain practical experience by working on production-style projects
-            that simulate real development and deployment environments.
-          </p>
+            <p className="mt-4 text-base leading-7 text-slate-200">
+              Gain practical experience by working on production-style projects
+              that simulate real development and deployment environments.
+            </p>
+          </div>
         </Container>
       </section>
 
@@ -47,7 +54,7 @@ export default function RealTimeProjectsPage() {
         <div className="grid gap-6 md:grid-cols-3">
           {projects.map((project) => (
             <div
-              key={project.title}
+              key={project.id}
               className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
             >
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 text-white">
@@ -59,11 +66,23 @@ export default function RealTimeProjectsPage() {
               </h2>
 
               <p className="mt-2 text-sm leading-6 text-slate-600">
-                {project.description}
+                {project.shortDescription}
               </p>
+
+              {project.level && (
+                <p className="mt-3 text-xs font-medium capitalize text-slate-500">
+                  Level: {project.level}
+                </p>
+              )}
             </div>
           ))}
         </div>
+
+        {projects.length === 0 && (
+          <p className="text-sm text-slate-500">
+            No real-time projects available right now.
+          </p>
+        )}
 
         <div className="mt-10 flex flex-wrap gap-4">
           <Link

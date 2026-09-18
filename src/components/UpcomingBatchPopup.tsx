@@ -59,7 +59,7 @@ export function UpcomingBatchPopup({
       } catch {
         // Ignore storage errors (private browsing, disabled storage, etc.).
       }
-    }, 100)
+    }, 50)
 
     return () => window.clearTimeout(timer)
   }, [popupKey])

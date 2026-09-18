@@ -5,6 +5,7 @@ import { HeroCarousel } from '@/components/HeroCarousel'
 import { QuickLinks } from '@/components/QuickLinks'
 import { CourseCarousel } from '@/components/CourseCarousel'
 import { getPayload } from '@/lib/getPayload'
+import { CampusPlacementVisit } from '@/components/CampusPlacementVisit'
 
 export default async function HomePage() {
   const payload = await getPayload()
@@ -51,7 +52,9 @@ export default async function HomePage() {
           </div>
         </Container>
       </section>
-
+      
+      {/* Campus Placement Visit */}
+      <CampusPlacementVisit />
       <section className="py-20">
         <Container>
           <SectionHeading eyebrow="Success Stories" title="What our students say" />

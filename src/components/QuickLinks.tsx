@@ -41,11 +41,11 @@ export async function QuickLinks() {
       gradient: 'from-fuchsia-500 to-purple-700',
     },
     {
-      href: '/course-schedule',
-      label: 'Course Schedule',
-      sub: 'See upcoming batches',
-      gradient: 'from-indigo-600 to-slate-900',
-    },
+  href: '/new-batches',
+  label: 'Upcoming Batches',
+  sub: 'See upcoming batches',
+  gradient: 'from-indigo-600 to-slate-900',
+},
   ]
 
   return (
