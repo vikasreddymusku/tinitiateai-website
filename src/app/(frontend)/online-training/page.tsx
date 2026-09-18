@@ -1,58 +1,29 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import { ResponsiveHero } from '@/components/ResponsiveHero'
 import { Container } from '@/components/ui/Container'
 import { ScheduleTable } from '@/components/ScheduleTable'
 import { getUpcomingBatches } from '@/lib/batches'
 
-export const metadata = { title: 'Online Training — TinitiateAI' }
+export const metadata = {
+  title: 'Online Training — TinitiateAI',
+}
 
 export default async function OnlineTrainingPage() {
   const batches = await getUpcomingBatches('online')
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative isolate overflow-hidden py-16 text-white sm:py-20">
-        <Image
-          src="/images/training/online-training.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="-z-20 object-cover object-center"
-        />
+      <ResponsiveHero
+        imageSrc="/images/training/online-training.png"
+        mobileImageSrc="/images/training/mobile/online-training.webp"
+        eyebrow="Training"
+        title="Online Training"
+        description="Join live, instructor-led sessions from anywhere with the same curriculum, mentor access, and projects as our classroom batches — ideal if you can't make it to a physical location."
+        cta={{
+          href: '/book-a-demo',
+          label: 'Book a Free Demo',
+        }}
+      />
 
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/20" />
-
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-slate-950/50 via-transparent to-slate-950/10" />
-
-        <Container>
-          <div className="max-w-2xl">
-            <span className="text-sm font-semibold uppercase tracking-wide text-brand-300">
-              Training
-            </span>
-
-            <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
-              Online Training
-            </h1>
-
-            <p className="mt-4 text-base leading-7 text-slate-200">
-              Join live, instructor-led sessions from anywhere with the same
-              curriculum, mentor access, and projects as our classroom batches —
-              ideal if you can&apos;t make it to a physical location.
-            </p>
-
-            <Link
-              href="/book-a-demo"
-              className="mt-6 inline-block rounded-full bg-brand-500 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-brand-400 hover:shadow-xl"
-            >
-              Book a Free Demo
-            </Link>
-          </div>
-        </Container>
-      </section>
-
-      {/* Upcoming batches */}
       <Container className="py-16">
         <h2 className="text-xl font-bold text-slate-900">
           Upcoming Online Batches

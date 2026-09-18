@@ -49,7 +49,7 @@ export async function QuickLinks() {
   ]
 
   return (
-    <div className="relative z-10 mx-auto -mt-10 grid w-full max-w-6xl grid-cols-2 gap-4 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
+    <div className="relative z-10 mx-auto mt-4 grid w-full max-w-6xl grid-cols-2 gap-4 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
       {links.map((link) => (
         <Link
           key={link.href}

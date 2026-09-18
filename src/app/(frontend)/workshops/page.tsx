@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import Link from 'next/link'
+import { ResponsiveHero } from '@/components/ResponsiveHero'
 import { Container } from '@/components/ui/Container'
 import { getPayload } from '@/lib/getPayload'
 
@@ -21,35 +21,13 @@ export default async function WorkshopsPage() {
 
   return (
     <>
-      <section className="relative isolate overflow-hidden py-16 text-white sm:py-20">
-        <Image
-          src="/images/training/workshops.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="-z-20 object-cover object-center"
-        />
-
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/20" />
-
-        <Container>
-          <div className="max-w-2xl">
-            <span className="text-sm font-semibold uppercase tracking-wide text-brand-300">
-              Services
-            </span>
-
-            <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
-              Workshops
-            </h1>
-
-            <p className="mt-4 text-base leading-7 text-slate-200">
-              Practical, instructor-led workshops designed to help you understand
-              technologies through hands-on learning and real-world examples.
-            </p>
-          </div>
-        </Container>
-      </section>
+      <ResponsiveHero
+        imageSrc="/images/training/workshops.png"
+        mobileImageSrc="/images/training/mobile/workshops.webp"
+        eyebrow="Services"
+        title="Workshops"
+        description="Practical, instructor-led workshops designed to help you understand technologies through hands-on learning and real-world examples."
+      />
 
       <Container className="py-16">
         <div className="grid gap-6 md:grid-cols-3">
