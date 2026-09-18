@@ -13,7 +13,7 @@ export const Media: CollectionConfig = {
     },
   ],
   upload: {
-    staticDir: '../media',
+    staticDir: 'public/media',
     imageSizes: [
       { name: 'thumbnail', width: 400, height: 300, position: 'centre' },
       { name: 'card', width: 768, height: 512, position: 'centre' },

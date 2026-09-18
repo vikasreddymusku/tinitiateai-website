@@ -16,7 +16,9 @@ export function CourseFeatureCard({
       ? course.cardLogo
       : null
 
-  const cardLogoUrl = cardLogo?.url ?? null
+  const cardLogoUrl = cardLogo?.filename
+  ? `/media/${cardLogo.filename}`
+  : null
 
   const [shareOpen, setShareOpen] = useState(false)
   const [shareUrl, setShareUrl] = useState('')
