@@ -1,7 +1,48 @@
 import Link from 'next/link'
 import type { SiteSetting } from '@/payload-types'
 
+type Office = {
+  label: string
+  address: string
+}
+
+function parseOffices(address?: string | null): Office[] {
+  if (!address?.trim()) return []
+
+  return address
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line, index) => {
+      const separator = line.indexOf(':')
+
+      if (separator === -1) {
+        return {
+          label:
+            index === 0
+              ? 'Corporate Office'
+              : `Office ${index + 1}`,
+          address: line,
+        }
+      }
+
+      return {
+        label: line.slice(0, separator).trim(),
+        address: line.slice(separator + 1).trim(),
+      }
+    })
+    .filter((office) => office.address)
+}
+
+function googleMapsUrl(address: string) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    address,
+  )}`
+}
+
 export function Footer({ settings }: { settings: SiteSetting }) {
+  const offices = parseOffices(settings.address)
+
   return (
     <footer className="border-t border-slate-800 bg-slate-950 text-slate-300">
       <div className="mx-auto w-full max-w-7xl px-6 py-14 lg:px-8">
@@ -84,40 +125,95 @@ export function Footer({ settings }: { settings: SiteSetting }) {
           </div>
 
           {/* Company */}
-          <div>
-            <p className="text-sm font-semibold text-white">
-              Company
-            </p>
+          {/* Company */}
+<div>
+  <p className="text-sm font-semibold text-white">
+    Company
+  </p>
 
-            <ul className="mt-4 space-y-3 text-sm text-slate-400">
-              <li>
-                <Link
-                  href="/about"
-                  className="transition hover:text-white"
-                >
-                  About
-                </Link>
-              </li>
+  <ul className="mt-4 space-y-3 text-sm text-slate-400">
+    <li>
+      <Link
+        href="/about"
+        className="transition hover:text-white"
+      >
+        About Us
+      </Link>
+    </li>
 
-              <li>
-                <Link
-                  href="/contact"
-                  className="transition hover:text-white"
-                >
-                  Contact
-                </Link>
-              </li>
+    <li>
+      <Link
+        href="/pricing"
+        className="transition hover:text-white"
+      >
+        Program Pricing
+      </Link>
+    </li>
 
-              <li>
-                <Link
-                  href="/book-a-demo"
-                  className="transition hover:text-white"
-                >
-                  Book a Demo
-                </Link>
-              </li>
-            </ul>
-          </div>
+    <li>
+      <Link
+        href="/pricing-policy"
+        className="transition hover:text-white"
+      >
+        Pricing Policy
+      </Link>
+    </li>
+
+    <li>
+      <Link
+        href="/privacy-policy"
+        className="transition hover:text-white"
+      >
+        Privacy Policy
+      </Link>
+    </li>
+
+    <li>
+      <Link
+        href="/refund-policy"
+        className="transition hover:text-white"
+      >
+        Refund Policy
+      </Link>
+    </li>
+
+    <li>
+      <Link
+        href="/cookie-policy"
+        className="transition hover:text-white"
+      >
+        Cookie Policy
+      </Link>
+    </li>
+
+    <li>
+      <Link
+        href="/terms"
+        className="transition hover:text-white"
+      >
+        Terms &amp; Conditions
+      </Link>
+    </li>
+
+    <li>
+      <Link
+        href="/contact"
+        className="transition hover:text-white"
+      >
+        Contact
+      </Link>
+    </li>
+
+    <li>
+      <Link
+        href="/book-a-demo"
+        className="transition hover:text-white"
+      >
+        Book a Demo
+      </Link>
+    </li>
+  </ul>
+</div>
 
           {/* Contact */}
           <div>
@@ -149,15 +245,35 @@ export function Footer({ settings }: { settings: SiteSetting }) {
                 </div>
               )}
 
-              {settings.address && (
-                <div className="flex items-start gap-3">
-                  <LocationIcon />
+              {offices.length > 0 && (
+  <div className="flex items-start gap-3">
+    <LocationIcon />
 
-                  <span className="max-w-sm leading-6">
-                    {settings.address}
-                  </span>
-                </div>
-              )}
+    <div className="min-w-0 space-y-4">
+      {offices.map((office, index) => (
+        <div key={`${office.label}-${index}`}>
+          <p className="font-semibold text-slate-300">
+            {office.label}
+          </p>
+
+          <p className="mt-1 max-w-sm leading-6 text-slate-400">
+            {office.address}
+          </p>
+
+          <a
+            href={googleMapsUrl(office.address)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1.5 inline-flex items-center gap-1.5 text-xs font-medium text-brand-400 transition hover:text-white"
+          >
+            <SmallLocationIcon />
+            View on Google Maps
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
             </div>
           </div>
         </div>
@@ -176,6 +292,25 @@ export function Footer({ settings }: { settings: SiteSetting }) {
         </div>
       </div>
     </footer>
+  )
+}
+
+function SmallLocationIcon() {
+  return (
+    <svg
+      width="13"
+      height="13"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
+      <circle cx="12" cy="10" r="2.5" />
+    </svg>
   )
 }
 

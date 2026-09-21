@@ -7,6 +7,7 @@ import { NextDemoBar } from "@/components/layout/NextDemoBar";
 import { UpcomingBatchPopup } from "@/components/UpcomingBatchPopup";
 import { getSiteSettings } from "@/lib/siteSettings";
 import { getNextDemoSlot } from "@/lib/nextDemo";
+import { ChatWidget } from "@/components/ChatWidget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,6 +52,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </div>
         <main className="flex-1">{children}</main>
         <Footer settings={settings} />
+<ChatWidget />
       </body>
     </html>
   );
