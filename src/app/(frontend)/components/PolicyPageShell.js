@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, ChevronRight, Home, Mail } from 'lucide-react'
+import { ArrowRight, ChevronRight } from 'lucide-react'
 
 export const policyDirectory = [
   { label: 'Pricing Policy', href: '/pricing-policy' },
@@ -186,22 +186,7 @@ export default function PolicyPageShell({
                   {intro}
                 </p>
 
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <a
-                    href={`mailto:${contactEmail}`}
-                    className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-[#111827] px-6 py-3 text-sm font-semibold text-white transition hover:bg-black dark:bg-sky-500/15 dark:text-sky-100 dark:hover:bg-sky-500/20"
-                  >
-                    <Mail className="h-4 w-4" />
-                    Contact Support
-                  </a>
-                  <Link
-                    href="/"
-                    className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-900 hover:bg-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-100 dark:hover:border-slate-500"
-                  >
-                    <Home className="h-4 w-4" />
-                    Back to Home
-                  </Link>
-                </div>
+                
 
                 <div className="mt-8 grid gap-3 sm:grid-cols-3">
                   {highlights.map((item, index) => (

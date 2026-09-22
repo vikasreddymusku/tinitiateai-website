@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowRight,
   BadgeCheck,
   BriefcaseBusiness,
   ClipboardList,
@@ -188,21 +187,7 @@ export default function PricingPage() {
                 trainee salary options before you choose your commitment.
               </p>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href="/request-callback?service=Pricing%20Guidance"
-                  className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#c9a227] to-[#e8bc30] px-6 py-3 text-sm font-bold text-[#1a1a00] shadow-lg transition hover:scale-[1.02]"
-                >
-                  Get Plan Guidance
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <a
-                  href="#plans"
-                  className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur transition hover:border-white/40 hover:bg-white/15"
-                >
-                  Compare Plans
-                </a>
-              </div>
+              
             </div>
 
             <div className="relative hidden overflow-hidden rounded-[1.45rem] border border-white/14 bg-white/[0.07] p-3 shadow-[0_26px_76px_-42px_rgba(2,6,23,0.9)] backdrop-blur-xl lg:block">
@@ -382,21 +367,7 @@ export default function PricingPage() {
                 The team will recommend Spark, Prime, or Apex, explain the fee
                 plus GST, and help you start with the right commitment level.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
-                <Link
-                  href="/request-callback?service=Pricing%20Guidance"
-                  className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#c9a227] to-[#e8bc30] px-6 py-3 text-sm font-bold text-[#1a1a00] shadow-lg transition hover:scale-[1.02]"
-                >
-                  Request Pricing Call
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href="/training/professional-training"
-                  className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-bold text-gray-900 transition hover:border-[#c9a227] hover:text-[#7a5d00] dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:border-[#f2c94c] dark:hover:text-[#f2c94c]"
-                >
-                  View Training Paths
-                </Link>
-              </div>
+              
             </div>
 
             <div>

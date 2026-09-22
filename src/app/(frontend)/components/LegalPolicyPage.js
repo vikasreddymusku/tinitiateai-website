@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, Home, Mail } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 export const legalPolicyDirectory = [
   { label: 'Pricing Policy', href: '/pricing-policy' },
@@ -71,16 +71,7 @@ export default function LegalPolicyPage({
               ))}
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href={`mailto:${supportEmail}`} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#12345f] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#1d4775]">
-                <Mail className="h-4 w-4" />
-                Contact Support
-              </a>
-              <Link href="/" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-[#12345f] transition hover:border-[#c9a227] dark:border-slate-700 dark:bg-slate-900 dark:text-white">
-                <Home className="h-4 w-4" />
-                Back to Home
-              </Link>
-            </div>
+           
           </div>
 
           <aside className="h-fit rounded-[1.75rem] bg-[#0f2242] p-6 text-white shadow-[0_28px_80px_rgba(2,6,23,0.24)] dark:bg-slate-900">

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import {
-  ArrowRight,
   BookOpenCheck,
   CheckCircle2,
   Crown,
@@ -32,8 +31,7 @@ const pricingPlans = [
       "Tinitiate Training Certificate",
     ],
     tags: ["Beginner Friendly", "Guided"],
-    href: "/request-callback?service=Tinitiate%20Spark%20Pricing",
-    cta: "Discuss Spark",
+    
     icon: BookOpenCheck,
     color: "#1f5fae",
     textColor: "#1f5fae",
@@ -67,8 +65,7 @@ const pricingPlans = [
       "Tinitiate Training Certificate",
     ],
     tags: ["Interview Ready", "Earn Salary"],
-    href: "/request-callback?service=Tinitiate%20Prime%20Pricing",
-    cta: "Discuss Prime",
+    
     icon: Rocket,
     color: "#b98519",
     textColor: "#9a6100",
@@ -103,8 +100,7 @@ const pricingPlans = [
       "Tinitiate Training Certificate",
     ],
     tags: ["Job From Day 1", "Career Security"],
-    href: "/request-callback?service=Tinitiate%20Apex%20Pricing",
-    cta: "Discuss Apex",
+   
     icon: Crown,
     color: "#b9223a",
     textColor: "#b9223a",
@@ -327,18 +323,7 @@ function PricingCard({ plan, compact = false }) {
           </div>
         </SectionBlock>
 
-        <Link
-          href={plan.href}
-          className="mt-auto inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
-          style={{
-            backgroundImage: plan.headerGradient,
-            "--tw-ring-color": plan.color,
-            boxShadow: `0 18px 42px -28px ${plan.glow}`,
-          }}
-        >
-          {plan.cta}
-          <ArrowRight className="h-4 w-4" />
-        </Link>
+        
       </div>
     </article>
   );
@@ -371,17 +356,7 @@ export function PricingComparisonTable({ className = "" }) {
             The same spreadsheet details in a quick scan table.
           </p>
         </div>
-        <div className="hidden grid-cols-3 gap-3 lg:grid">
-          {pricingPlans.map((plan) => (
-            <Link
-              key={plan.key}
-              href={plan.href}
-              className="inline-flex min-h-10 items-center justify-center rounded-full border border-[#d8e2ee] bg-white px-4 py-2 text-xs font-black text-[#13233a] transition hover:-translate-y-0.5 hover:border-[#c9a227] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
-            >
-              {plan.cta}
-            </Link>
-          ))}
-        </div>
+        
       </div>
 
       <div className="lg:hidden">
