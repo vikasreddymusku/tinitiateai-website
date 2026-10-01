@@ -48,7 +48,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
         <div className="sticky top-0 z-50">
           <NextDemoBar slot={nextDemo} />
-          <Navbar siteName={settings.siteName} />
+          <Navbar logo={settings.logo} />
         </div>
         <main className="flex-1">{children}</main>
         <Footer settings={settings} />

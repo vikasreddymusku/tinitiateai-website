@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { SearchBox } from '@/components/SearchBox'
 import { NavDropdown } from '@/components/layout/NavDropdown'
+import Image from 'next/image'
+import type { Media } from '@/payload-types'
 
 const navLinks = [{ href: '/courses', label: 'Courses' }]
 
@@ -32,19 +34,24 @@ const trailingLinks = [
   { href: '/contact', label: 'Contact' },
 ]
 
-export function Navbar({ siteName }: { siteName: string }) {
+export function Navbar({ logo }: { logo?: number | null | Media }) {
   const [open, setOpen] = useState(false)
   const [openGroup, setOpenGroup] = useState<string | null>(null)
 
   return (
     <header className="border-b border-slate-200 bg-white/90 backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2 text-xl font-bold text-slate-900">
-          <span className="rounded-lg bg-gradient-to-br from-brand-500 to-accent-500 px-2 py-1 text-white">
-            AI
-          </span>
-          {siteName}
-        </Link>
+        <Link href="/" className="flex items-center">
+  {typeof logo === 'object' && logo?.url ? (
+    <Image
+      src={logo.url}
+      alt={logo.alt || 'TinitiateAI'}
+      width={190}
+      height={64}
+      className="h-12 w-auto object-contain"
+    />
+  ) : null}
+</Link>
 
         <SearchBox className="mx-6 hidden max-w-xs flex-1 lg:flex" />
 
